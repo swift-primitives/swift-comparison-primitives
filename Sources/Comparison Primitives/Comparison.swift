@@ -8,6 +8,7 @@
 ///
 /// ## Core Types
 ///
+/// - ``Protocol``: A `Comparable` fork with `~Copyable` support
 /// - ``Result``: The outcome of a three-way comparison (less, equal, greater)
 ///
 /// ## Example
@@ -18,10 +19,20 @@
 /// print(result.reversed)     // greater
 /// print(result.isLess)       // true
 /// ```
-public enum Comparison: Sendable {
-    /// The protocol for types that define a total ordering.
-    ///
-    /// This is a typealias for `Swift.Comparable`, namespaced within
-    /// the `Comparison` enum for API consistency.
-    public typealias `Protocol` = Swift.Comparable
-}
+///
+/// ## Move-Only Types
+///
+/// Unlike `Swift.Comparable`, `Comparison.Protocol` supports `~Copyable` types:
+///
+/// ```swift
+/// struct Token: ~Copyable, Comparison.Protocol {
+///     let id: Int
+///     static func < (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+///         lhs.id < rhs.id
+///     }
+///     static func == (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+///         lhs.id == rhs.id
+///     }
+/// }
+/// ```
+public enum Comparison: Sendable {}

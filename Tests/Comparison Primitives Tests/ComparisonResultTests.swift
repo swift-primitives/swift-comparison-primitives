@@ -157,29 +157,29 @@ struct ComparisonResultTests {
         }
     }
 
-    // MARK: - Construction from Comparable
+    // MARK: - Construction from Swift.Comparable
 
-    @Suite("Comparable Construction")
-    struct ComparableConstructionTests {
+    @Suite("Swift.Comparable Construction")
+    struct SwiftComparableConstructionTests {
         @Test("Int comparison")
         func intComparison() {
-            #expect(Comparison.Result(1, 2) == .less)
-            #expect(Comparison.Result(2, 2) == .equal)
-            #expect(Comparison.Result(3, 2) == .greater)
+            #expect(Comparison.Result(comparing: 1, to: 2) == .less)
+            #expect(Comparison.Result(comparing: 2, to: 2) == .equal)
+            #expect(Comparison.Result(comparing: 3, to: 2) == .greater)
         }
 
         @Test("String comparison")
         func stringComparison() {
-            #expect(Comparison.Result("apple", "banana") == .less)
-            #expect(Comparison.Result("hello", "hello") == .equal)
-            #expect(Comparison.Result("zebra", "apple") == .greater)
+            #expect(Comparison.Result(comparing: "apple", to: "banana") == .less)
+            #expect(Comparison.Result(comparing: "hello", to: "hello") == .equal)
+            #expect(Comparison.Result(comparing: "zebra", to: "apple") == .greater)
         }
 
         @Test("Double comparison")
         func doubleComparison() {
-            #expect(Comparison.Result(1.5, 2.5) == .less)
-            #expect(Comparison.Result(2.5, 2.5) == .equal)
-            #expect(Comparison.Result(3.5, 2.5) == .greater)
+            #expect(Comparison.Result(comparing: 1.5, to: 2.5) == .less)
+            #expect(Comparison.Result(comparing: 2.5, to: 2.5) == .equal)
+            #expect(Comparison.Result(comparing: 3.5, to: 2.5) == .greater)
         }
     }
 
@@ -220,6 +220,74 @@ struct ComparisonResultTests {
         }
     }
 
+    // MARK: - Construction from Comparison.Protocol (~Copyable)
+
+    @Suite("Comparison.Protocol Construction")
+    struct ComparisonProtocolConstructionTests {
+        struct Token: ~Copyable, Comparison.`Protocol` {
+            let id: Int
+
+            static func < (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+                lhs.id < rhs.id
+            }
+
+            static func == (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+                lhs.id == rhs.id
+            }
+        }
+
+        @Test("~Copyable type comparison via Result")
+        func nonCopyableComparison() {
+            let a = Token(id: 1)
+            let b = Token(id: 2)
+            let c = Token(id: 1)
+
+            #expect(Comparison.Result(a, b) == .less)
+            #expect(Comparison.Result(b, a) == .greater)
+            #expect(Comparison.Result(a, c) == .equal)
+        }
+
+        @Test("~Copyable operators: less than")
+        func nonCopyableLessThan() {
+            let a = Token(id: 5)
+            let b = Token(id: 10)
+            let result: Bool = a < b
+            #expect(result == true)
+        }
+
+        @Test("~Copyable operators: greater than")
+        func nonCopyableGreaterThan() {
+            let a = Token(id: 10)
+            let b = Token(id: 5)
+            let result: Bool = a > b
+            #expect(result == true)
+        }
+
+        @Test("~Copyable operators: less than or equal")
+        func nonCopyableLessThanOrEqual() {
+            let a = Token(id: 5)
+            let b = Token(id: 5)
+            let result: Bool = a <= b
+            #expect(result == true)
+        }
+
+        @Test("~Copyable operators: greater than or equal")
+        func nonCopyableGreaterThanOrEqual() {
+            let a = Token(id: 5)
+            let b = Token(id: 5)
+            let result: Bool = a >= b
+            #expect(result == true)
+        }
+
+        @Test("~Copyable operators: equal")
+        func nonCopyableEqual() {
+            let a = Token(id: 5)
+            let b = Token(id: 5)
+            let result: Bool = a == b
+            #expect(result == true)
+        }
+    }
+
     // MARK: - Lexicographic Comparison Example
 
     @Suite("Lexicographic Comparison")
@@ -231,9 +299,9 @@ struct ComparisonResultTests {
         }
 
         func compare(_ lhs: Person, _ rhs: Person) -> Comparison.Result {
-            Comparison.Result(lhs.name, rhs.name)
-                .then(Comparison.Result(lhs.age, rhs.age))
-                .then(Comparison.Result(lhs.id, rhs.id))
+            Comparison.Result(comparing: lhs.name, to: rhs.name)
+                .then(Comparison.Result(comparing: lhs.age, to: rhs.age))
+                .then(Comparison.Result(comparing: lhs.id, to: rhs.id))
         }
 
         @Test("Multi-field comparison")
