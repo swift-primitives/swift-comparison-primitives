@@ -457,6 +457,81 @@ struct ComparisonResultTests {
         }
     }
 
+    // MARK: - Swift.Comparable Fluent API
+
+    @Suite("Swift.Comparable Fluent API")
+    struct SwiftComparableFluentAPITests {
+        @Test("String has .compare property")
+        func stringCompare() {
+            var apple = "apple"
+            let banana = "banana"
+
+            #expect(apple.compare.to(banana) == .less)
+            #expect(apple.compare.isLess(than: banana) == true)
+            #expect(apple.compare.isGreater(than: banana) == false)
+            #expect(apple.compare.isEqual(to: "apple") == true)
+        }
+
+        @Test("Double has .compare property")
+        func doubleCompare() {
+            var a = 1.5
+            let b = 2.5
+
+            #expect(a.compare.to(b) == .less)
+            #expect(a.compare.isLess(than: b) == true)
+            #expect(a.compare.isGreater(than: b) == false)
+            #expect(a.compare.isEqual(to: 1.5) == true)
+        }
+
+        @Test("Float has .compare property")
+        func floatCompare() {
+            var a: Float = 3.14
+            let b: Float = 2.71
+
+            #expect(a.compare.to(b) == .greater)
+            #expect(a.compare.isGreater(than: b) == true)
+            #expect(a.compare.isLess(than: b) == false)
+        }
+
+        @Test("Character has .compare property")
+        func characterCompare() {
+            var a: Character = "a"
+            let z: Character = "z"
+
+            #expect(a.compare.to(z) == .less)
+            #expect(a.compare.isLess(than: z) == true)
+            #expect(a.compare.isGreaterOrEqual(to: "a") == true)
+        }
+
+        @Test("Int uses Comparison.Protocol path (both paths work)")
+        func intCompare() {
+            // Int conforms to both Comparison.Protocol and Swift.Comparable
+            // Either path should work
+            var a = 5
+            let b = 10
+
+            #expect(a.compare.to(b) == .less)
+            #expect(a.compare.isLess(than: b) == true)
+            #expect(a.compare.isLessOrEqual(to: 5) == true)
+        }
+
+        @Test("String has .clamp property")
+        func stringClamp() {
+            var name = "bob"
+            #expect(name.clamp.between("alice", and: "charlie") == "bob")
+            #expect(name.clamp.above("charlie") == "charlie")
+            #expect(name.clamp.below("alice") == "alice")
+        }
+
+        @Test("Double has .clamp property")
+        func doubleClamp() {
+            var temp = 105.0
+            #expect(temp.clamp.between(0.0, and: 100.0) == 100.0)
+            #expect(temp.clamp.above(110.0) == 110.0)
+            #expect(temp.clamp.below(50.0) == 50.0)
+        }
+    }
+
     // MARK: - Lexicographic Comparison Example
 
     @Suite("Lexicographic Comparison")
