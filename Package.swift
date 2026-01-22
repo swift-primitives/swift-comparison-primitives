@@ -18,12 +18,14 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(path: "../swift-equation-primitives"),
         .package(path: "../swift-property-primitives"),
     ],
     targets: [
         .target(
             name: "Comparison Primitives",
             dependencies: [
+                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
             ]
         ),

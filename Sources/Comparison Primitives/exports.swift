@@ -1,4 +1,5 @@
 // exports.swift
-// Re-export dependencies for consumers.
+// Re-exports dependencies for convenient single-import usage.
 
-// No dependencies to re-export (Tier 0 package).
+@_exported public import Equation_Primitives
+@_exported public import Property_Primitives

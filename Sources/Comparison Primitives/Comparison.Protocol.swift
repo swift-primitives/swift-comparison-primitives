@@ -1,6 +1,8 @@
 // Comparison.Protocol.swift
 // A Comparable fork with ~Copyable support.
 
+public import Equation_Primitives
+
 extension Comparison {
     /// A protocol for types that define a total ordering, supporting both
     /// `Copyable` and `~Copyable` types.
@@ -10,7 +12,8 @@ extension Comparison {
     ///
     /// ## Conforming to Protocol
     ///
-    /// Types conforming to `Comparison.Protocol` must implement `<` and `==`:
+    /// Types conforming to `Comparison.Protocol` must implement `<` and `==`
+    /// (via `Equation.Protocol`):
     ///
     /// ```swift
     /// struct Token: ~Copyable {
@@ -32,7 +35,13 @@ extension Comparison {
     ///
     /// Conforming types must satisfy trichotomy: for any two values `a` and `b`,
     /// exactly one of `a < b`, `a == b`, or `a > b` must be true.
-    public protocol `Protocol`: ~Copyable {
+    ///
+    /// ## Relationship to Equation.Protocol
+    ///
+    /// `Comparison.Protocol` refines `Equation.Protocol`, inheriting the equality
+    /// requirement. This matches Swift stdlib's `Comparable: Equatable` pattern
+    /// and enforces the semantic invariant that ordered types support equality.
+    public protocol `Protocol`: Equation.`Protocol`, ~Copyable {
         /// Returns whether the left-hand side is less than the right-hand side.
         ///
         /// - Parameters:
@@ -40,14 +49,6 @@ extension Comparison {
         ///   - rhs: The right-hand side value.
         /// - Returns: `true` if `lhs` is ordered before `rhs`.
         static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool
-
-        /// Returns whether the left-hand side is equal to the right-hand side.
-        ///
-        /// - Parameters:
-        ///   - lhs: The left-hand side value.
-        ///   - rhs: The right-hand side value.
-        /// - Returns: `true` if `lhs` is equal to `rhs`.
-        static func == (lhs: borrowing Self, rhs: borrowing Self) -> Bool
     }
 }
 
