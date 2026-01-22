@@ -91,3 +91,12 @@ If we named our protocol `Comparable`:
 cd experiments/comparable-shadowing-test
 swift run
 ```
+
+## Related Proposals
+
+This experiment motivated the following draft SE proposals:
+
+- [SE-XXXX Borrowing Parameter Witness Relaxation](../../../../swift-institute/Sources/Swift%20Institute/Swift%20Institute.docc/SE-Proposals/SE-XXXX%20Borrowing%20Parameter%20Witness%20Relaxation.md) — Foundational language change to allow non-`borrowing` implementations to satisfy `borrowing` requirements for `Copyable` types
+- [SE-YYYY Noncopyable Equatable and Comparable](../../../../swift-institute/Sources/Swift%20Institute/Swift%20Institute.docc/SE-Proposals/SE-YYYY%20Noncopyable%20Equatable%20and%20Comparable.md) — Standard library evolution to add `~Copyable` support to `Equatable` and `Comparable`
+
+These proposals would enable the "magic" adoption that this experiment proved impossible with current Swift.
