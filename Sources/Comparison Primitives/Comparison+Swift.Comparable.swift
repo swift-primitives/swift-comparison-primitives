@@ -1,4 +1,4 @@
-// Comparison.Result+Swift.Comparable.swift
+// Comparison+Swift.Comparable.swift
 // Bridge for Swift.Comparable types.
 
 // MARK: - Comparison.Protocol Conformance for Integer Types
@@ -33,12 +33,12 @@ extension UInt32: Comparison.`Protocol` {}
 /// Conformance for `UInt64` to `Comparison.Protocol`.
 extension UInt64: Comparison.`Protocol` {}
 
-// MARK: - Comparison.Result Initializer
+// MARK: - Comparison Initializer
 
-extension Comparison.Result {
+extension Comparison {
     /// Creates a comparison result from two `Swift.Comparable` values.
     ///
-    /// This initializer bridges `Swift.Comparable` types to `Comparison.Result`,
+    /// This initializer bridges `Swift.Comparable` types to `Comparison`,
     /// enabling use with standard library types like `Int`, `String`, and `Double`.
     ///
     /// - Parameters:
@@ -48,10 +48,10 @@ extension Comparison.Result {
     /// ## Example
     ///
     /// ```swift
-    /// let result = Comparison.Result(comparing: 5, to: 10)
+    /// let result = Comparison(comparing: 5, to: 10)
     /// print(result)  // less
     ///
-    /// let equal = Comparison.Result(comparing: "hello", to: "hello")
+    /// let equal = Comparison(comparing: "hello", to: "hello")
     /// print(equal)   // equal
     /// ```
     ///

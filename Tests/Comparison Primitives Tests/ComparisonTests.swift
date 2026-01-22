@@ -1,10 +1,10 @@
-// ComparisonResultTests.swift
-// Tests for Comparison.Result
+// ComparisonTests.swift
+// Tests for Comparison
 
 import Testing
 @testable import Comparison_Primitives
 
-@Suite("Comparison.Result")
+@Suite("Comparison")
 struct ComparisonResultTests {
 
     // MARK: - Basic Cases
@@ -13,7 +13,7 @@ struct ComparisonResultTests {
     struct CasesTests {
         @Test("All cases exist")
         func allCasesExist() {
-            let cases = Comparison.Result.allCases
+            let cases = Comparison.allCases
             #expect(cases.count == 3)
             #expect(cases.contains(.less))
             #expect(cases.contains(.equal))
@@ -27,28 +27,28 @@ struct ComparisonResultTests {
     struct ReversalTests {
         @Test("Reversal mapping")
         func reversalMapping() {
-            #expect(Comparison.Result.less.reversed == .greater)
-            #expect(Comparison.Result.equal.reversed == .equal)
-            #expect(Comparison.Result.greater.reversed == .less)
+            #expect(Comparison.less.reversed == .greater)
+            #expect(Comparison.equal.reversed == .equal)
+            #expect(Comparison.greater.reversed == .less)
         }
 
         @Test("Reversal is involution: rev(rev(x)) = x")
         func reversalIsInvolution() {
-            for value in Comparison.Result.allCases {
+            for value in Comparison.allCases {
                 #expect(value.reversed.reversed == value)
             }
         }
 
         @Test("Prefix ! operator")
         func prefixOperator() {
-            #expect(!Comparison.Result.less == .greater)
-            #expect(!Comparison.Result.equal == .equal)
-            #expect(!Comparison.Result.greater == .less)
+            #expect(!Comparison.less == .greater)
+            #expect(!Comparison.equal == .equal)
+            #expect(!Comparison.greater == .less)
         }
 
         @Test("Prefix ! is equivalent to reversed")
         func prefixOperatorEquivalence() {
-            for value in Comparison.Result.allCases {
+            for value in Comparison.allCases {
                 #expect(!value == value.reversed)
             }
         }
@@ -60,21 +60,21 @@ struct ComparisonResultTests {
     struct ChainingTests {
         @Test("Left identity: equal.then(x) = x")
         func leftIdentity() {
-            for value in Comparison.Result.allCases {
-                #expect(Comparison.Result.equal.then(value) == value)
+            for value in Comparison.allCases {
+                #expect(Comparison.equal.then(value) == value)
             }
         }
 
         @Test("Right identity: x.then(equal) = x")
         func rightIdentity() {
-            for value in Comparison.Result.allCases {
+            for value in Comparison.allCases {
                 #expect(value.then(.equal) == value)
             }
         }
 
         @Test("Associativity: (x.then(y)).then(z) = x.then(y.then(z))")
         func associativity() {
-            let cases = Comparison.Result.allCases
+            let cases = Comparison.allCases
             for x in cases {
                 for y in cases {
                     for z in cases {
@@ -88,30 +88,30 @@ struct ComparisonResultTests {
 
         @Test("Short-circuit behavior")
         func shortCircuit() {
-            #expect(Comparison.Result.less.then(.greater) == .less)
-            #expect(Comparison.Result.greater.then(.less) == .greater)
-            #expect(Comparison.Result.equal.then(.less) == .less)
-            #expect(Comparison.Result.equal.then(.greater) == .greater)
+            #expect(Comparison.less.then(.greater) == .less)
+            #expect(Comparison.greater.then(.less) == .greater)
+            #expect(Comparison.equal.then(.less) == .less)
+            #expect(Comparison.equal.then(.greater) == .greater)
         }
 
         @Test("Lazy chaining with then(with:)")
         func lazyChaining() {
             var evaluationCount = 0
 
-            let lazyValue: () -> Comparison.Result = {
+            let lazyValue: () -> Comparison = {
                 evaluationCount += 1
                 return .greater
             }
 
             // Should NOT evaluate when primary is decisive
-            _ = Comparison.Result.less.then(with: lazyValue)
+            _ = Comparison.less.then(with: lazyValue)
             #expect(evaluationCount == 0)
 
-            _ = Comparison.Result.greater.then(with: lazyValue)
+            _ = Comparison.greater.then(with: lazyValue)
             #expect(evaluationCount == 0)
 
             // Should evaluate when primary is equal
-            let result = Comparison.Result.equal.then(with: lazyValue)
+            let result = Comparison.equal.then(with: lazyValue)
             #expect(evaluationCount == 1)
             #expect(result == .greater)
         }
@@ -123,37 +123,37 @@ struct ComparisonResultTests {
     struct BooleanPropertiesTests {
         @Test("isLess")
         func isLess() {
-            #expect(Comparison.Result.less.isLess == true)
-            #expect(Comparison.Result.equal.isLess == false)
-            #expect(Comparison.Result.greater.isLess == false)
+            #expect(Comparison.less.isLess == true)
+            #expect(Comparison.equal.isLess == false)
+            #expect(Comparison.greater.isLess == false)
         }
 
         @Test("isEqual")
         func isEqual() {
-            #expect(Comparison.Result.less.isEqual == false)
-            #expect(Comparison.Result.equal.isEqual == true)
-            #expect(Comparison.Result.greater.isEqual == false)
+            #expect(Comparison.less.isEqual == false)
+            #expect(Comparison.equal.isEqual == true)
+            #expect(Comparison.greater.isEqual == false)
         }
 
         @Test("isGreater")
         func isGreater() {
-            #expect(Comparison.Result.less.isGreater == false)
-            #expect(Comparison.Result.equal.isGreater == false)
-            #expect(Comparison.Result.greater.isGreater == true)
+            #expect(Comparison.less.isGreater == false)
+            #expect(Comparison.equal.isGreater == false)
+            #expect(Comparison.greater.isGreater == true)
         }
 
         @Test("isLessOrEqual")
         func isLessOrEqual() {
-            #expect(Comparison.Result.less.isLessOrEqual == true)
-            #expect(Comparison.Result.equal.isLessOrEqual == true)
-            #expect(Comparison.Result.greater.isLessOrEqual == false)
+            #expect(Comparison.less.isLessOrEqual == true)
+            #expect(Comparison.equal.isLessOrEqual == true)
+            #expect(Comparison.greater.isLessOrEqual == false)
         }
 
         @Test("isGreaterOrEqual")
         func isGreaterOrEqual() {
-            #expect(Comparison.Result.less.isGreaterOrEqual == false)
-            #expect(Comparison.Result.equal.isGreaterOrEqual == true)
-            #expect(Comparison.Result.greater.isGreaterOrEqual == true)
+            #expect(Comparison.less.isGreaterOrEqual == false)
+            #expect(Comparison.equal.isGreaterOrEqual == true)
+            #expect(Comparison.greater.isGreaterOrEqual == true)
         }
     }
 
@@ -163,23 +163,23 @@ struct ComparisonResultTests {
     struct SwiftComparableConstructionTests {
         @Test("Int comparison")
         func intComparison() {
-            #expect(Comparison.Result(comparing: 1, to: 2) == .less)
-            #expect(Comparison.Result(comparing: 2, to: 2) == .equal)
-            #expect(Comparison.Result(comparing: 3, to: 2) == .greater)
+            #expect(Comparison(comparing: 1, to: 2) == .less)
+            #expect(Comparison(comparing: 2, to: 2) == .equal)
+            #expect(Comparison(comparing: 3, to: 2) == .greater)
         }
 
         @Test("String comparison")
         func stringComparison() {
-            #expect(Comparison.Result(comparing: "apple", to: "banana") == .less)
-            #expect(Comparison.Result(comparing: "hello", to: "hello") == .equal)
-            #expect(Comparison.Result(comparing: "zebra", to: "apple") == .greater)
+            #expect(Comparison(comparing: "apple", to: "banana") == .less)
+            #expect(Comparison(comparing: "hello", to: "hello") == .equal)
+            #expect(Comparison(comparing: "zebra", to: "apple") == .greater)
         }
 
         @Test("Double comparison")
         func doubleComparison() {
-            #expect(Comparison.Result(comparing: 1.5, to: 2.5) == .less)
-            #expect(Comparison.Result(comparing: 2.5, to: 2.5) == .equal)
-            #expect(Comparison.Result(comparing: 3.5, to: 2.5) == .greater)
+            #expect(Comparison(comparing: 1.5, to: 2.5) == .less)
+            #expect(Comparison(comparing: 2.5, to: 2.5) == .equal)
+            #expect(Comparison(comparing: 3.5, to: 2.5) == .greater)
         }
     }
 
@@ -189,13 +189,13 @@ struct ComparisonResultTests {
     struct ProtocolConformancesTests {
         @Test("Hashable - can be used in Set")
         func hashable() {
-            let set: Set<Comparison.Result> = [.less, .equal, .greater]
+            let set: Set<Comparison> = [.less, .equal, .greater]
             #expect(set.count == 3)
         }
 
         @Test("Hashable - can be used as dictionary key")
         func dictionaryKey() {
-            let dict: [Comparison.Result: String] = [
+            let dict: [Comparison: String] = [
                 .less: "less",
                 .equal: "equal",
                 .greater: "greater"
@@ -208,9 +208,9 @@ struct ComparisonResultTests {
         @Test("Sendable - can pass to actor")
         func sendable() async {
             actor TestActor {
-                var value: Comparison.Result = .equal
-                func set(_ v: Comparison.Result) { value = v }
-                func get() -> Comparison.Result { value }
+                var value: Comparison = .equal
+                func set(_ v: Comparison) { value = v }
+                func get() -> Comparison { value }
             }
 
             let actor = TestActor()
@@ -242,9 +242,9 @@ struct ComparisonResultTests {
             let b = Token(id: 2)
             let c = Token(id: 1)
 
-            #expect(Comparison.Result(a, b) == .less)
-            #expect(Comparison.Result(b, a) == .greater)
-            #expect(Comparison.Result(a, c) == .equal)
+            #expect(Comparison(a, b) == .less)
+            #expect(Comparison(b, a) == .greater)
+            #expect(Comparison(a, c) == .equal)
         }
 
         @Test("~Copyable operators: less than")
@@ -542,10 +542,10 @@ struct ComparisonResultTests {
             let id: Int
         }
 
-        func compare(_ lhs: Person, _ rhs: Person) -> Comparison.Result {
-            Comparison.Result(comparing: lhs.name, to: rhs.name)
-                .then(Comparison.Result(comparing: lhs.age, to: rhs.age))
-                .then(Comparison.Result(comparing: lhs.id, to: rhs.id))
+        func compare(_ lhs: Person, _ rhs: Person) -> Comparison {
+            Comparison(comparing: lhs.name, to: rhs.name)
+                .then(Comparison(comparing: lhs.age, to: rhs.age))
+                .then(Comparison(comparing: lhs.id, to: rhs.id))
         }
 
         @Test("Multi-field comparison")

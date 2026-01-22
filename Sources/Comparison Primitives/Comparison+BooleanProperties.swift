@@ -1,7 +1,7 @@
-// Comparison.Result+BooleanProperties.swift
+// Comparison+BooleanProperties.swift
 // Boolean query properties for comparison results.
 
-extension Comparison.Result {
+extension Comparison {
     /// Whether the comparison is `.less`.
     @inlinable
     public var isLess: Bool { self == .less }

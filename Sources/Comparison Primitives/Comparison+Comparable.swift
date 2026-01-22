@@ -1,7 +1,7 @@
-// Comparison.Result+Comparable.swift
+// Comparison+Comparable.swift
 // Construction from Comparable types.
 
-extension Comparison.Result {
+extension Comparison {
     /// Creates a comparison result from two comparable values.
     ///
     /// Supports both `Copyable` and `~Copyable` types via `borrowing` parameters.
@@ -13,10 +13,10 @@ extension Comparison.Result {
     /// ## Example
     ///
     /// ```swift
-    /// let result = Comparison.Result(5, 10)
+    /// let result = Comparison(5, 10)
     /// print(result)  // less
     ///
-    /// let equal = Comparison.Result("hello", "hello")
+    /// let equal = Comparison("hello", "hello")
     /// print(equal)   // equal
     /// ```
     ///
@@ -34,7 +34,7 @@ extension Comparison.Result {
     ///         lhs.id == rhs.id
     ///     }
     /// }
-    /// let result = Comparison.Result(token1, token2)
+    /// let result = Comparison(token1, token2)
     /// ```
     @inlinable
     public init<T: Comparison.`Protocol` & ~Copyable>(_ lhs: borrowing T, _ rhs: borrowing T) {

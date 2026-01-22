@@ -29,7 +29,7 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Parameter other: The value to compare against.
     /// - Returns: `.less`, `.equal`, or `.greater`.
     @inlinable
-    public func to(_ other: borrowing Base) -> Comparison.Result {
+    public func to(_ other: borrowing Base) -> Comparison {
         if unsafe base.pointee < other {
             return .less
         } else if unsafe base.pointee == other {

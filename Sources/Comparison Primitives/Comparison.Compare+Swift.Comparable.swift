@@ -36,8 +36,8 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     /// - Returns: `.less`, `.equal`, or `.greater`.
     @_disfavoredOverload
     @inlinable
-    public func to(_ other: Base) -> Comparison.Result {
-        Comparison.Result(comparing: unsafe base.pointee, to: other)
+    public func to(_ other: Base) -> Comparison {
+        Comparison(comparing: unsafe base.pointee, to: other)
     }
 
     /// Checks if this value is less than another: `.compare.isLess(than: other)`

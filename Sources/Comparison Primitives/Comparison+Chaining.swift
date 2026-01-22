@@ -1,7 +1,7 @@
-// Comparison.Result+Chaining.swift
+// Comparison+Chaining.swift
 // Lexicographic chaining operations for comparison results.
 
-extension Comparison.Result {
+extension Comparison {
     /// Returns self if not equal, otherwise returns other.
     ///
     /// This operation implements the monoid structure of comparison results,
@@ -11,12 +11,12 @@ extension Comparison.Result {
     ///
     /// ```swift
     /// // Compare persons by name, then age, then id
-    /// Comparison.Result(x.name, y.name)
-    ///     .then(Comparison.Result(x.age, y.age))
-    ///     .then(Comparison.Result(x.id, y.id))
+    /// Comparison(x.name, y.name)
+    ///     .then(Comparison(x.age, y.age))
+    ///     .then(Comparison(x.id, y.id))
     /// ```
     @inlinable
-    public func then(_ other: Comparison.Result) -> Comparison.Result {
+    public func then(_ other: Comparison) -> Comparison {
         switch self {
         case .equal: return other
         case .less, .greater: return self
@@ -32,11 +32,11 @@ extension Comparison.Result {
     ///
     /// ```swift
     /// // Expensive comparison only evaluated if names are equal
-    /// Comparison.Result(x.name, y.name)
-    ///     .then(with: { Comparison.Result(expensiveCompute(x), expensiveCompute(y)) })
+    /// Comparison(x.name, y.name)
+    ///     .then(with: { Comparison(expensiveCompute(x), expensiveCompute(y)) })
     /// ```
     @inlinable
-    public func then(with other: () -> Comparison.Result) -> Comparison.Result {
+    public func then(with other: () -> Comparison) -> Comparison {
         switch self {
         case .equal: return other()
         case .less, .greater: return self
