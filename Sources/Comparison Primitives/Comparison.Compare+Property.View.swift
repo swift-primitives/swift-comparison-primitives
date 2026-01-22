@@ -1,0 +1,86 @@
+// This source file is part of the Swift Institute open source project
+//
+// Copyright (c) 2025 Swift Institute and the Swift project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE.md for license information
+//
+// SPDX-License-Identifier: Apache-2.0
+
+public import Property_Primitives
+
+/// Property.View extensions for comparison operations on `Comparison.Protocol` conformers.
+extension Property.View
+where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
+
+    /// Compares this value to another: `.compare.to(other)`
+    ///
+    /// Returns a three-way comparison result indicating the relative order.
+    ///
+    /// ```swift
+    /// var a = Token(id: 5)
+    /// var b = Token(id: 10)
+    ///
+    /// a.compare.to(b)  // .less
+    /// b.compare.to(a)  // .greater
+    /// a.compare.to(a)  // .equal
+    /// ```
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `.less`, `.equal`, or `.greater`.
+    @inlinable
+    public func to(_ other: borrowing Base) -> Comparison.Result {
+        if unsafe base.pointee < other {
+            return .less
+        } else if unsafe base.pointee == other {
+            return .equal
+        } else {
+            return .greater
+        }
+    }
+
+    /// Checks if this value is less than another: `.compare.isLess(than: other)`
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `true` if `self < other`.
+    @inlinable
+    public func isLess(than other: borrowing Base) -> Bool {
+        unsafe base.pointee < other
+    }
+
+    /// Checks if this value is greater than another: `.compare.isGreater(than: other)`
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `true` if `self > other`.
+    @inlinable
+    public func isGreater(than other: borrowing Base) -> Bool {
+        unsafe base.pointee > other
+    }
+
+    /// Checks if this value equals another: `.compare.isEqual(to: other)`
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `true` if `self == other`.
+    @inlinable
+    public func isEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee == other
+    }
+
+    /// Checks if this value is less than or equal to another: `.compare.isLessOrEqual(to: other)`
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `true` if `self <= other`.
+    @inlinable
+    public func isLessOrEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee <= other
+    }
+
+    /// Checks if this value is greater than or equal to another: `.compare.isGreaterOrEqual(to: other)`
+    ///
+    /// - Parameter other: The value to compare against.
+    /// - Returns: `true` if `self >= other`.
+    @inlinable
+    public func isGreaterOrEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee >= other
+    }
+}

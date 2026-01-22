@@ -288,6 +288,175 @@ struct ComparisonResultTests {
         }
     }
 
+    // MARK: - Fluent Compare API
+
+    @Suite("Fluent Compare API")
+    struct FluentCompareAPITests {
+        struct Token: ~Copyable, Comparison.`Protocol` {
+            let id: Int
+
+            static func < (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+                lhs.id < rhs.id
+            }
+
+            static func == (lhs: borrowing Token, rhs: borrowing Token) -> Bool {
+                lhs.id == rhs.id
+            }
+        }
+
+        @Test(".compare.to() returns correct result")
+        func compareTo() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+            var c = Token(id: 5)
+
+            #expect(a.compare.to(b) == .less)
+            #expect(b.compare.to(a) == .greater)
+            #expect(a.compare.to(c) == .equal)
+        }
+
+        @Test(".compare.isLess(than:) returns correct result")
+        func compareIsLess() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+
+            #expect(a.compare.isLess(than: b) == true)
+            #expect(b.compare.isLess(than: a) == false)
+        }
+
+        @Test(".compare.isGreater(than:) returns correct result")
+        func compareIsGreater() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+
+            #expect(b.compare.isGreater(than: a) == true)
+            #expect(a.compare.isGreater(than: b) == false)
+        }
+
+        @Test(".compare.isEqual(to:) returns correct result")
+        func compareIsEqual() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+            var c = Token(id: 5)
+
+            #expect(a.compare.isEqual(to: c) == true)
+            #expect(a.compare.isEqual(to: b) == false)
+        }
+
+        @Test(".compare.isLessOrEqual(to:) returns correct result")
+        func compareIsLessOrEqual() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+            var c = Token(id: 5)
+
+            #expect(a.compare.isLessOrEqual(to: b) == true)
+            #expect(a.compare.isLessOrEqual(to: c) == true)
+            #expect(b.compare.isLessOrEqual(to: a) == false)
+        }
+
+        @Test(".compare.isGreaterOrEqual(to:) returns correct result")
+        func compareIsGreaterOrEqual() {
+            var a = Token(id: 5)
+            var b = Token(id: 10)
+            var c = Token(id: 5)
+
+            #expect(b.compare.isGreaterOrEqual(to: a) == true)
+            #expect(a.compare.isGreaterOrEqual(to: c) == true)
+            #expect(a.compare.isGreaterOrEqual(to: b) == false)
+        }
+
+        @Test("Automatic .compare property via protocol extension")
+        func automaticCompareProperty() {
+            // Token2 doesn't manually define .compare - it gets it from the protocol extension
+            struct Token2: ~Copyable, Comparison.`Protocol` {
+                let value: Int
+
+                static func < (lhs: borrowing Token2, rhs: borrowing Token2) -> Bool {
+                    lhs.value < rhs.value
+                }
+
+                static func == (lhs: borrowing Token2, rhs: borrowing Token2) -> Bool {
+                    lhs.value == rhs.value
+                }
+            }
+
+            var x = Token2(value: 1)
+            var y = Token2(value: 2)
+
+            #expect(x.compare.to(y) == .less)
+            #expect(x.compare.isLess(than: y) == true)
+        }
+    }
+
+    // MARK: - Fluent Clamp API
+
+    @Suite("Fluent Clamp API")
+    struct FluentClampAPITests {
+        // Note: Clamp requires Copyable, so we use Int which conforms to Swift.Comparable
+        // We need a Copyable type that conforms to Comparison.Protocol
+
+        struct Score: Comparison.`Protocol`, Copyable {
+            var value: Int
+
+            static func < (lhs: Score, rhs: Score) -> Bool {
+                lhs.value < rhs.value
+            }
+
+            static func == (lhs: Score, rhs: Score) -> Bool {
+                lhs.value == rhs.value
+            }
+        }
+
+        @Test(".clamp.between() clamps to lower bound")
+        func clampBetweenLower() {
+            var score = Score(value: -5)
+            let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
+            #expect(result.value == 0)
+        }
+
+        @Test(".clamp.between() clamps to upper bound")
+        func clampBetweenUpper() {
+            var score = Score(value: 150)
+            let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
+            #expect(result.value == 100)
+        }
+
+        @Test(".clamp.between() returns value when in range")
+        func clampBetweenInRange() {
+            var score = Score(value: 50)
+            let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
+            #expect(result.value == 50)
+        }
+
+        @Test(".clamp.above() clamps to minimum")
+        func clampAbove() {
+            var score = Score(value: -10)
+            let result = score.clamp.above(Score(value: 0))
+            #expect(result.value == 0)
+        }
+
+        @Test(".clamp.above() returns value when above minimum")
+        func clampAboveWhenAbove() {
+            var score = Score(value: 50)
+            let result = score.clamp.above(Score(value: 0))
+            #expect(result.value == 50)
+        }
+
+        @Test(".clamp.below() clamps to maximum")
+        func clampBelow() {
+            var score = Score(value: 150)
+            let result = score.clamp.below(Score(value: 100))
+            #expect(result.value == 100)
+        }
+
+        @Test(".clamp.below() returns value when below maximum")
+        func clampBelowWhenBelow() {
+            var score = Score(value: 50)
+            let result = score.clamp.below(Score(value: 100))
+            #expect(result.value == 50)
+        }
+    }
+
     // MARK: - Lexicographic Comparison Example
 
     @Suite("Lexicographic Comparison")

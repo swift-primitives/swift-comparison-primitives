@@ -1,6 +1,40 @@
 // Comparison.Result+Swift.Comparable.swift
 // Bridge for Swift.Comparable types.
 
+// MARK: - Comparison.Protocol Conformance for Integer Types
+
+/// Conformance for `Int` to `Comparison.Protocol`.
+extension Int: Comparison.`Protocol` {}
+
+/// Conformance for `UInt` to `Comparison.Protocol`.
+extension UInt: Comparison.`Protocol` {}
+
+/// Conformance for `Int8` to `Comparison.Protocol`.
+extension Int8: Comparison.`Protocol` {}
+
+/// Conformance for `Int16` to `Comparison.Protocol`.
+extension Int16: Comparison.`Protocol` {}
+
+/// Conformance for `Int32` to `Comparison.Protocol`.
+extension Int32: Comparison.`Protocol` {}
+
+/// Conformance for `Int64` to `Comparison.Protocol`.
+extension Int64: Comparison.`Protocol` {}
+
+/// Conformance for `UInt8` to `Comparison.Protocol`.
+extension UInt8: Comparison.`Protocol` {}
+
+/// Conformance for `UInt16` to `Comparison.Protocol`.
+extension UInt16: Comparison.`Protocol` {}
+
+/// Conformance for `UInt32` to `Comparison.Protocol`.
+extension UInt32: Comparison.`Protocol` {}
+
+/// Conformance for `UInt64` to `Comparison.Protocol`.
+extension UInt64: Comparison.`Protocol` {}
+
+// MARK: - Comparison.Result Initializer
+
 extension Comparison.Result {
     /// Creates a comparison result from two `Swift.Comparable` values.
     ///

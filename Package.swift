@@ -17,11 +17,15 @@ let package = Package(
             targets: ["Comparison Primitives"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(path: "../swift-property-primitives"),
+    ],
     targets: [
         .target(
             name: "Comparison Primitives",
-            dependencies: []
+            dependencies: [
+                .product(name: "Property Primitives", package: "swift-property-primitives"),
+            ]
         ),
         .testTarget(
             name: "Comparison Primitives Tests",

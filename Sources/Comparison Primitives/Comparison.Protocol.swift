@@ -48,30 +48,6 @@ extension Comparison {
         ///   - rhs: The right-hand side value.
         /// - Returns: `true` if `lhs` is equal to `rhs`.
         static func == (lhs: borrowing Self, rhs: borrowing Self) -> Bool
-
-        /// Returns whether the left-hand side is less than or equal to the right-hand side.
-        ///
-        /// - Parameters:
-        ///   - lhs: The left-hand side value.
-        ///   - rhs: The right-hand side value.
-        /// - Returns: `true` if `lhs` is ordered before or equal to `rhs`.
-        static func <= (lhs: borrowing Self, rhs: borrowing Self) -> Bool
-
-        /// Returns whether the left-hand side is greater than the right-hand side.
-        ///
-        /// - Parameters:
-        ///   - lhs: The left-hand side value.
-        ///   - rhs: The right-hand side value.
-        /// - Returns: `true` if `lhs` is ordered after `rhs`.
-        static func > (lhs: borrowing Self, rhs: borrowing Self) -> Bool
-
-        /// Returns whether the left-hand side is greater than or equal to the right-hand side.
-        ///
-        /// - Parameters:
-        ///   - lhs: The left-hand side value.
-        ///   - rhs: The right-hand side value.
-        /// - Returns: `true` if `lhs` is ordered after or equal to `rhs`.
-        static func >= (lhs: borrowing Self, rhs: borrowing Self) -> Bool
     }
 }
 
