@@ -1,7 +1,7 @@
 // Comparison.Protocol+Swift.CollectionOfOne.swift
 // Conditional conformance for CollectionOfOne.
 
-extension CollectionOfOne: Comparison.`Protocol` where Element: Comparison.`Protocol` {
+extension CollectionOfOne: Comparison.`Protocol` where Element: Comparison.`Protocol` & Copyable {
     /// Returns whether the left-hand side is less than the right-hand side.
     ///
     /// Compares the single element in each collection.

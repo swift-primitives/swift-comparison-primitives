@@ -1,7 +1,7 @@
 // Comparison.Protocol+Swift.ContiguousArray.swift
 // Conditional conformance for ContiguousArray.
 
-extension ContiguousArray: Comparison.`Protocol` where Element: Comparison.`Protocol` {
+extension ContiguousArray: Comparison.`Protocol` where Element: Comparison.`Protocol` & Copyable {
     /// Returns whether the left-hand side is lexicographically less than the right-hand side.
     ///
     /// Compares arrays element-by-element. If all compared elements are equal,

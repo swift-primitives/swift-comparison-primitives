@@ -1,7 +1,7 @@
 // Comparison.Protocol+Swift.ArraySlice.swift
 // Conditional conformance for ArraySlice.
 
-extension ArraySlice: Comparison.`Protocol` where Element: Comparison.`Protocol` {
+extension ArraySlice: Comparison.`Protocol` where Element: Comparison.`Protocol` & Copyable {
     /// Returns whether the left-hand side is lexicographically less than the right-hand side.
     ///
     /// Compares slices element-by-element. If all compared elements are equal,
