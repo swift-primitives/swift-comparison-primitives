@@ -1,11 +1,10 @@
-// Comparison.Protocol+Swift.ContiguousArray.swift
-// Conditional conformance for ContiguousArray.
+// Comparison.Protocol+Swift.ReversedCollection.swift
+// Conditional conformance for ReversedCollection.
 
-extension ContiguousArray: Comparison.`Protocol` where Element: Comparison.`Protocol` {
+extension ReversedCollection: Comparison.`Protocol` where Base.Element: Comparison.`Protocol` {
     /// Returns whether the left-hand side is lexicographically less than the right-hand side.
     ///
-    /// Compares arrays element-by-element. If all compared elements are equal,
-    /// the shorter array is considered less than the longer one.
+    /// Compares elements in reversed order.
     ///
     /// - Parameters:
     ///   - lhs: The left-hand side value.

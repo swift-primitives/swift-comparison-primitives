@@ -61,6 +61,7 @@ extension Comparison {
     /// to `Comparison.Protocol` (including `~Copyable` types), use
     /// `init(_:_:)` instead.
     @inlinable
+    @_disfavoredOverload
     public init<T: Swift.Comparable>(comparing lhs: T, to rhs: T) {
         if lhs < rhs {
             self = .less

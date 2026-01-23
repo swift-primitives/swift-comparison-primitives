@@ -1,11 +1,11 @@
-// Comparison.Protocol+Swift.ContiguousArray.swift
-// Conditional conformance for ContiguousArray.
+// Comparison.Protocol+Swift.KeyValuePairs.swift
+// Conditional conformance for KeyValuePairs.
 
-extension ContiguousArray: Comparison.`Protocol` where Element: Comparison.`Protocol` {
+extension KeyValuePairs: Comparison.`Protocol` where Key: Comparison.`Protocol`, Value: Comparison.`Protocol` {
     /// Returns whether the left-hand side is lexicographically less than the right-hand side.
     ///
-    /// Compares arrays element-by-element. If all compared elements are equal,
-    /// the shorter array is considered less than the longer one.
+    /// Compares key-value pairs in order. Keys are compared first, then values
+    /// if keys are equal.
     ///
     /// - Parameters:
     ///   - lhs: The left-hand side value.
@@ -15,8 +15,10 @@ extension ContiguousArray: Comparison.`Protocol` where Element: Comparison.`Prot
     @_disfavoredOverload
     public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         for (l, r) in zip(lhs, rhs) {
-            if l < r { return true }
-            if r < l { return false }
+            if l.key < r.key { return true }
+            if r.key < l.key { return false }
+            if l.value < r.value { return true }
+            if r.value < l.value { return false }
         }
         return lhs.count < rhs.count
     }

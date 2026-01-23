@@ -12,8 +12,8 @@ extension Range: Comparison.`Protocol` where Bound: Comparison.`Protocol` & Copy
     ///   - lhs: The left-hand side value.
     ///   - rhs: The right-hand side value.
     /// - Returns: `true` if `lhs` is ordered before `rhs`.
-    @_disfavoredOverload
     @inlinable
+    @_disfavoredOverload
     public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         let lhsCopy = copy lhs
         let rhsCopy = copy rhs

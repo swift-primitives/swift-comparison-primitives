@@ -12,6 +12,7 @@ extension ArraySlice: Comparison.`Protocol` where Element: Comparison.`Protocol`
     ///   - rhs: The right-hand side value.
     /// - Returns: `true` if `lhs` is lexicographically ordered before `rhs`.
     @inlinable
+    @_disfavoredOverload
     public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         for (l, r) in zip(lhs, rhs) {
             if l < r { return true }
