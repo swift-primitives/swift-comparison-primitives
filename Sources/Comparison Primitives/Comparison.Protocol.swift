@@ -56,19 +56,31 @@ extension Comparison {
 
 extension Comparison.`Protocol` where Self: ~Copyable {
     /// Default implementation: `lhs <= rhs` iff `!(rhs < lhs)`.
+    ///
+    /// - Note: Uses `@_disfavoredOverload` to prefer `Swift.Comparable` operators
+    ///   when the type conforms to both protocols.
     @inlinable
+    @_disfavoredOverload
     public static func <= (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         !(rhs < lhs)
     }
 
     /// Default implementation: `lhs > rhs` iff `rhs < lhs`.
+    ///
+    /// - Note: Uses `@_disfavoredOverload` to prefer `Swift.Comparable` operators
+    ///   when the type conforms to both protocols.
     @inlinable
+    @_disfavoredOverload
     public static func > (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         rhs < lhs
     }
 
     /// Default implementation: `lhs >= rhs` iff `!(lhs < rhs)`.
+    ///
+    /// - Note: Uses `@_disfavoredOverload` to prefer `Swift.Comparable` operators
+    ///   when the type conforms to both protocols.
     @inlinable
+    @_disfavoredOverload
     public static func >= (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
         !(lhs < rhs)
     }
