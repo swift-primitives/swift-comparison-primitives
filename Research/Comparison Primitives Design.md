@@ -466,10 +466,10 @@ extension Comparison.Result {
 ```swift
 extension Comparison.Result: Finite.Enumerable {
     @inlinable
-    public static var count: Int { 3 }
+    public static var count: Cardinal { 3 }
 
     @inlinable
-    public var ordinal: Int {
+    public var ordinal: Ordinal {
         switch self {
         case .less: 0
         case .equal: 1
@@ -478,7 +478,7 @@ extension Comparison.Result: Finite.Enumerable {
     }
 
     @inlinable
-    public init(__unchecked: Void, ordinal: Int) {
+    public init(__unchecked: Void, ordinal: Ordinal) {
         self = [.less, .equal, .greater][ordinal]
     }
 }
