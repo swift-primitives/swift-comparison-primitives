@@ -3,5 +3,3 @@
 
 @_exported public import Equation_Primitives
 @_exported public import Property_Primitives
-@_exported public import Comparison_Primitives_Core
-@_exported public import Comparison_Primitives_Standard_Library_Integration

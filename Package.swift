@@ -26,9 +26,22 @@ let package = Package(
         .target(
             name: "Comparison Primitives",
             dependencies: [
+                "Comparison Primitives Core",
+                "Comparison Primitives Standard Library Integration"
+            ]
+        ),
+        .target(
+            name: "Comparison Primitives Core",
+            dependencies: [
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Identity Primitives", package: "swift-identity-primitives"),
+            ]
+        ),
+        .target(
+            name: "Comparison Primitives Standard Library Integration",
+            dependencies: [
+                "Comparison Primitives Core"
             ]
         ),
         .testTarget(
