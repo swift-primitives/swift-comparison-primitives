@@ -1,4 +1,11 @@
 # Three-Way Comparison Primitives: A Survey and Design for Swift
+<!--
+---
+version: 1.0.0
+last_updated: 2026-01-29
+status: RECOMMENDATION
+---
+-->
 
 **swift-comparison-primitives**
 
