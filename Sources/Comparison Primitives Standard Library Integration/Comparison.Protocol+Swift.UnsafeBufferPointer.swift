@@ -16,8 +16,8 @@ extension UnsafeBufferPointer: Comparison.`Protocol` {
     @inlinable
     @_disfavoredOverload
     public static func < (lhs: borrowing Self, rhs: borrowing Self) -> Bool {
-        let lhsCopy = copy lhs
-        let rhsCopy = copy rhs
+        let lhsCopy = unsafe copy lhs
+        let rhsCopy = unsafe copy rhs
         let lhsAddr = unsafe lhsCopy.baseAddress.map { Int(bitPattern: $0) } ?? 0
         let rhsAddr = unsafe rhsCopy.baseAddress.map { Int(bitPattern: $0) } ?? 0
         if lhsAddr != rhsAddr { return lhsAddr < rhsAddr }
