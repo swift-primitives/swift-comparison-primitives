@@ -19,6 +19,50 @@ public import Property_Primitives
 /// Note: Methods are marked `@_disfavoredOverload` so that types conforming to
 /// both `Comparison.Protocol` and `Swift.Comparable` (like `Int`) use the
 /// `Comparison.Protocol` extension which supports `borrowing` parameters.
+
+// SE-0499: Swift.Comparable no longer implies Copyable in Swift 6.4.
+// Without ~Copyable, the extension gains implicit `where Base: Copyable` on 6.4,
+// making it unreachable for ~Copyable types.
+#if compiler(>=6.4)
+extension Property.View where Base: Swift.Comparable & ~Copyable, Tag == Comparison.Compare {
+
+    @_disfavoredOverload
+    @inlinable
+    public func to(_ other: borrowing Base) -> Comparison {
+        Comparison(comparing: unsafe base.pointee, to: other)
+    }
+
+    @_disfavoredOverload
+    @inlinable
+    public func isLess(than other: borrowing Base) -> Bool {
+        unsafe base.pointee < other
+    }
+
+    @_disfavoredOverload
+    @inlinable
+    public func isGreater(than other: borrowing Base) -> Bool {
+        unsafe base.pointee > other
+    }
+
+    @_disfavoredOverload
+    @inlinable
+    public func isEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee == other
+    }
+
+    @_disfavoredOverload
+    @inlinable
+    public func isLessOrEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee <= other
+    }
+
+    @_disfavoredOverload
+    @inlinable
+    public func isGreaterOrEqual(to other: borrowing Base) -> Bool {
+        unsafe base.pointee >= other
+    }
+}
+#else
 extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare {
 
     /// Compares this value to another: `.compare.to(other)`
@@ -90,6 +134,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
         unsafe base.pointee >= other
     }
 }
+#endif
 
 // MARK: - .compare Property for Swift.Comparable
 
