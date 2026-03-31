@@ -60,6 +60,22 @@ extension Comparison {
     /// Use this initializer for `Swift.Comparable` types. For types conforming
     /// to `Comparison.Protocol` (including `~Copyable` types), use
     /// `init(_:_:)` instead.
+    // SE-0499: Swift.Comparable no longer implies Copyable in Swift 6.4.
+    // The ~Copyable suppression + borrowing parameters let this init work
+    // for both Copyable and ~Copyable Comparable types.
+#if compiler(>=6.4)
+    @inlinable
+    @_disfavoredOverload
+    public init<T: Swift.Comparable & ~Copyable>(comparing lhs: borrowing T, to rhs: borrowing T) {
+        if lhs < rhs {
+            self = .less
+        } else if lhs > rhs {
+            self = .greater
+        } else {
+            self = .equal
+        }
+    }
+#else
     @inlinable
     @_disfavoredOverload
     public init<T: Swift.Comparable>(comparing lhs: T, to rhs: T) {
@@ -71,4 +87,5 @@ extension Comparison {
             self = .equal
         }
     }
+#endif
 }
