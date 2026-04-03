@@ -16,6 +16,14 @@ let package = Package(
             name: "Comparison Primitives",
             targets: ["Comparison Primitives"]
         ),
+        .library(
+            name: "Comparison Primitives Core",
+            targets: ["Comparison Primitives Core"]
+        ),
+        .library(
+            name: "Comparison Primitives Standard Library Integration",
+            targets: ["Comparison Primitives Standard Library Integration"]
+        ),
     ],
     dependencies: [
         .package(path: "../swift-equation-primitives"),
