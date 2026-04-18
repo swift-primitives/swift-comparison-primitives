@@ -1,0 +1,46 @@
+{
+  "$schema": "https://swift-institute.org/schemas/experiments-index-v1.json",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-18",
+  "title": "Experiments Index",
+  "blurb": "",
+  "scope": "swift-comparison-primitives (swift-primitives)",
+  "experiments": [
+    {
+      "directory": "Package.swift",
+      "displayName": "Package.swift",
+      "purpose": "Experiment discovery: verify all claims from Comparison-Primitives-Design.md",
+      "date": "2026-01-22",
+      "toolchain": "Swift 6.0",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    },
+    {
+      "directory": "comparable-shadowing-test",
+      "displayName": "comparable-shadowing-test",
+      "purpose": "Test whether declaring Comparable in a module shadows Swift.Comparable",
+      "date": "2026-01-22",
+      "toolchain": "Swift 6.2",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    },
+    {
+      "directory": "noncopyable-protocol-test",
+      "displayName": "noncopyable-protocol-test",
+      "purpose": "Comparable-like protocol with ~Copyable support using borrowing parameters",
+      "date": "2026-01-22",
+      "toolchain": "Swift 6.0",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    }
+  ]
+}
