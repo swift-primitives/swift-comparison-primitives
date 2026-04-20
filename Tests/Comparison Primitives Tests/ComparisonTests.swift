@@ -11,8 +11,8 @@ struct ComparisonResultTests {
 
     @Suite("Cases")
     struct CasesTests {
-        @Test("All cases exist")
-        func allCasesExist() {
+        @Test
+        func `All cases exist`() {
             let cases = Comparison.allCases
             #expect(cases.count == 3)
             #expect(cases.contains(.less))
@@ -25,29 +25,29 @@ struct ComparisonResultTests {
 
     @Suite("Reversal")
     struct ReversalTests {
-        @Test("Reversal mapping")
-        func reversalMapping() {
+        @Test
+        func `Reversal mapping`() {
             #expect(Comparison.less.reversed == .greater)
             #expect(Comparison.equal.reversed == .equal)
             #expect(Comparison.greater.reversed == .less)
         }
 
-        @Test("Reversal is involution: rev(rev(x)) = x")
-        func reversalIsInvolution() {
+        @Test
+        func `Reversal is involution: rev(rev(x)) = x`() {
             for value in Comparison.allCases {
                 #expect(value.reversed.reversed == value)
             }
         }
 
-        @Test("Prefix ! operator")
-        func prefixOperator() {
+        @Test
+        func `Prefix ! operator`() {
             #expect(!Comparison.less == .greater)
             #expect(!Comparison.equal == .equal)
             #expect(!Comparison.greater == .less)
         }
 
-        @Test("Prefix ! is equivalent to reversed")
-        func prefixOperatorEquivalence() {
+        @Test
+        func `Prefix ! is equivalent to reversed`() {
             for value in Comparison.allCases {
                 #expect(!value == value.reversed)
             }
@@ -58,22 +58,22 @@ struct ComparisonResultTests {
 
     @Suite("Chaining")
     struct ChainingTests {
-        @Test("Left identity: equal.then(x) = x")
-        func leftIdentity() {
+        @Test
+        func `Left identity: equal.then(x) = x`() {
             for value in Comparison.allCases {
                 #expect(Comparison.equal.then(value) == value)
             }
         }
 
-        @Test("Right identity: x.then(equal) = x")
-        func rightIdentity() {
+        @Test
+        func `Right identity: x.then(equal) = x`() {
             for value in Comparison.allCases {
                 #expect(value.then(.equal) == value)
             }
         }
 
-        @Test("Associativity: (x.then(y)).then(z) = x.then(y.then(z))")
-        func associativity() {
+        @Test
+        func `Associativity: (x.then(y)).then(z) = x.then(y.then(z))`() {
             let cases = Comparison.allCases
             for x in cases {
                 for y in cases {
@@ -86,16 +86,16 @@ struct ComparisonResultTests {
             }
         }
 
-        @Test("Short-circuit behavior")
-        func shortCircuit() {
+        @Test
+        func `Short-circuit behavior`() {
             #expect(Comparison.less.then(.greater) == .less)
             #expect(Comparison.greater.then(.less) == .greater)
             #expect(Comparison.equal.then(.less) == .less)
             #expect(Comparison.equal.then(.greater) == .greater)
         }
 
-        @Test("Lazy chaining with then(with:)")
-        func lazyChaining() {
+        @Test
+        func `Lazy chaining with then(with:)`() {
             var evaluationCount = 0
 
             let lazyValue: () -> Comparison = {
@@ -121,36 +121,36 @@ struct ComparisonResultTests {
 
     @Suite("Boolean Properties")
     struct BooleanPropertiesTests {
-        @Test("isLess")
-        func isLess() {
+        @Test
+        func `isLess`() {
             #expect(Comparison.less.isLess == true)
             #expect(Comparison.equal.isLess == false)
             #expect(Comparison.greater.isLess == false)
         }
 
-        @Test("isEqual")
-        func isEqual() {
+        @Test
+        func `isEqual`() {
             #expect(Comparison.less.isEqual == false)
             #expect(Comparison.equal.isEqual == true)
             #expect(Comparison.greater.isEqual == false)
         }
 
-        @Test("isGreater")
-        func isGreater() {
+        @Test
+        func `isGreater`() {
             #expect(Comparison.less.isGreater == false)
             #expect(Comparison.equal.isGreater == false)
             #expect(Comparison.greater.isGreater == true)
         }
 
-        @Test("isLessOrEqual")
-        func isLessOrEqual() {
+        @Test
+        func `isLessOrEqual`() {
             #expect(Comparison.less.isLessOrEqual == true)
             #expect(Comparison.equal.isLessOrEqual == true)
             #expect(Comparison.greater.isLessOrEqual == false)
         }
 
-        @Test("isGreaterOrEqual")
-        func isGreaterOrEqual() {
+        @Test
+        func `isGreaterOrEqual`() {
             #expect(Comparison.less.isGreaterOrEqual == false)
             #expect(Comparison.equal.isGreaterOrEqual == true)
             #expect(Comparison.greater.isGreaterOrEqual == true)
@@ -161,22 +161,22 @@ struct ComparisonResultTests {
 
     @Suite("Swift.Comparable Construction")
     struct SwiftComparableConstructionTests {
-        @Test("Int comparison")
-        func intComparison() {
+        @Test
+        func `Int comparison`() {
             #expect(Comparison(comparing: 1, to: 2) == .less)
             #expect(Comparison(comparing: 2, to: 2) == .equal)
             #expect(Comparison(comparing: 3, to: 2) == .greater)
         }
 
-        @Test("String comparison")
-        func stringComparison() {
+        @Test
+        func `String comparison`() {
             #expect(Comparison(comparing: "apple", to: "banana") == .less)
             #expect(Comparison(comparing: "hello", to: "hello") == .equal)
             #expect(Comparison(comparing: "zebra", to: "apple") == .greater)
         }
 
-        @Test("Double comparison")
-        func doubleComparison() {
+        @Test
+        func `Double comparison`() {
             #expect(Comparison(comparing: 1.5, to: 2.5) == .less)
             #expect(Comparison(comparing: 2.5, to: 2.5) == .equal)
             #expect(Comparison(comparing: 3.5, to: 2.5) == .greater)
@@ -187,14 +187,14 @@ struct ComparisonResultTests {
 
     @Suite("Protocol Conformances")
     struct ProtocolConformancesTests {
-        @Test("Hashable - can be used in Set")
-        func hashable() {
+        @Test
+        func `Hashable - can be used in Set`() {
             let set: Set<Comparison> = [.less, .equal, .greater]
             #expect(set.count == 3)
         }
 
-        @Test("Hashable - can be used as dictionary key")
-        func dictionaryKey() {
+        @Test
+        func `Hashable - can be used as dictionary key`() {
             let dict: [Comparison: String] = [
                 .less: "less",
                 .equal: "equal",
@@ -205,8 +205,8 @@ struct ComparisonResultTests {
             #expect(dict[.greater] == "greater")
         }
 
-        @Test("Sendable - can pass to actor")
-        func sendable() async {
+        @Test
+        func `Sendable - can pass to actor`() async {
             actor TestActor {
                 var value: Comparison = .equal
                 func set(_ v: Comparison) { value = v }
@@ -236,8 +236,8 @@ struct ComparisonResultTests {
             }
         }
 
-        @Test("~Copyable type comparison via Result")
-        func nonCopyableComparison() {
+        @Test
+        func `~Copyable type comparison via Result`() {
             let a = Token(id: 1)
             let b = Token(id: 2)
             let c = Token(id: 1)
@@ -247,40 +247,40 @@ struct ComparisonResultTests {
             #expect(Comparison(a, c) == .equal)
         }
 
-        @Test("~Copyable operators: less than")
-        func nonCopyableLessThan() {
+        @Test
+        func `~Copyable operators: less than`() {
             let a = Token(id: 5)
             let b = Token(id: 10)
             let result: Bool = a < b
             #expect(result == true)
         }
 
-        @Test("~Copyable operators: greater than")
-        func nonCopyableGreaterThan() {
+        @Test
+        func `~Copyable operators: greater than`() {
             let a = Token(id: 10)
             let b = Token(id: 5)
             let result: Bool = a > b
             #expect(result == true)
         }
 
-        @Test("~Copyable operators: less than or equal")
-        func nonCopyableLessThanOrEqual() {
+        @Test
+        func `~Copyable operators: less than or equal`() {
             let a = Token(id: 5)
             let b = Token(id: 5)
             let result: Bool = a <= b
             #expect(result == true)
         }
 
-        @Test("~Copyable operators: greater than or equal")
-        func nonCopyableGreaterThanOrEqual() {
+        @Test
+        func `~Copyable operators: greater than or equal`() {
             let a = Token(id: 5)
             let b = Token(id: 5)
             let result: Bool = a >= b
             #expect(result == true)
         }
 
-        @Test("~Copyable operators: equal")
-        func nonCopyableEqual() {
+        @Test
+        func `~Copyable operators: equal`() {
             let a = Token(id: 5)
             let b = Token(id: 5)
             let result: Bool = a == b
@@ -304,8 +304,8 @@ struct ComparisonResultTests {
             }
         }
 
-        @Test(".compare.to() returns correct result")
-        func compareTo() {
+        @Test
+        func `.compare.to() returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
             var c = Token(id: 5)
@@ -315,8 +315,8 @@ struct ComparisonResultTests {
             #expect(a.compare.to(c) == .equal)
         }
 
-        @Test(".compare.isLess(than:) returns correct result")
-        func compareIsLess() {
+        @Test
+        func `.compare.isLess(than:) returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
 
@@ -324,8 +324,8 @@ struct ComparisonResultTests {
             #expect(b.compare.isLess(than: a) == false)
         }
 
-        @Test(".compare.isGreater(than:) returns correct result")
-        func compareIsGreater() {
+        @Test
+        func `.compare.isGreater(than:) returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
 
@@ -333,8 +333,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isGreater(than: b) == false)
         }
 
-        @Test(".compare.isEqual(to:) returns correct result")
-        func compareIsEqual() {
+        @Test
+        func `.compare.isEqual(to:) returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
             var c = Token(id: 5)
@@ -343,8 +343,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isEqual(to: b) == false)
         }
 
-        @Test(".compare.isLessOrEqual(to:) returns correct result")
-        func compareIsLessOrEqual() {
+        @Test
+        func `.compare.isLessOrEqual(to:) returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
             var c = Token(id: 5)
@@ -354,8 +354,8 @@ struct ComparisonResultTests {
             #expect(b.compare.isLessOrEqual(to: a) == false)
         }
 
-        @Test(".compare.isGreaterOrEqual(to:) returns correct result")
-        func compareIsGreaterOrEqual() {
+        @Test
+        func `.compare.isGreaterOrEqual(to:) returns correct result`() {
             var a = Token(id: 5)
             var b = Token(id: 10)
             var c = Token(id: 5)
@@ -365,8 +365,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isGreaterOrEqual(to: b) == false)
         }
 
-        @Test("Automatic .compare property via protocol extension")
-        func automaticCompareProperty() {
+        @Test
+        func `Automatic .compare property via protocol extension`() {
             // Token2 doesn't manually define .compare - it gets it from the protocol extension
             struct Token2: ~Copyable, Comparison.`Protocol` {
                 let value: Int
@@ -407,50 +407,50 @@ struct ComparisonResultTests {
             }
         }
 
-        @Test(".clamp.between() clamps to lower bound")
-        func clampBetweenLower() {
+        @Test
+        func `.clamp.between() clamps to lower bound`() {
             var score = Score(value: -5)
             let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
             #expect(result.value == 0)
         }
 
-        @Test(".clamp.between() clamps to upper bound")
-        func clampBetweenUpper() {
+        @Test
+        func `.clamp.between() clamps to upper bound`() {
             var score = Score(value: 150)
             let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
             #expect(result.value == 100)
         }
 
-        @Test(".clamp.between() returns value when in range")
-        func clampBetweenInRange() {
+        @Test
+        func `.clamp.between() returns value when in range`() {
             var score = Score(value: 50)
             let result = score.clamp.between(Score(value: 0), and: Score(value: 100))
             #expect(result.value == 50)
         }
 
-        @Test(".clamp.above() clamps to minimum")
-        func clampAbove() {
+        @Test
+        func `.clamp.above() clamps to minimum`() {
             var score = Score(value: -10)
             let result = score.clamp.above(Score(value: 0))
             #expect(result.value == 0)
         }
 
-        @Test(".clamp.above() returns value when above minimum")
-        func clampAboveWhenAbove() {
+        @Test
+        func `.clamp.above() returns value when above minimum`() {
             var score = Score(value: 50)
             let result = score.clamp.above(Score(value: 0))
             #expect(result.value == 50)
         }
 
-        @Test(".clamp.below() clamps to maximum")
-        func clampBelow() {
+        @Test
+        func `.clamp.below() clamps to maximum`() {
             var score = Score(value: 150)
             let result = score.clamp.below(Score(value: 100))
             #expect(result.value == 100)
         }
 
-        @Test(".clamp.below() returns value when below maximum")
-        func clampBelowWhenBelow() {
+        @Test
+        func `.clamp.below() returns value when below maximum`() {
             var score = Score(value: 50)
             let result = score.clamp.below(Score(value: 100))
             #expect(result.value == 50)
@@ -461,8 +461,8 @@ struct ComparisonResultTests {
 
     @Suite("Swift.Comparable Fluent API")
     struct SwiftComparableFluentAPITests {
-        @Test("String has .compare property")
-        func stringCompare() {
+        @Test
+        func `String has .compare property`() {
             var apple = "apple"
             let banana = "banana"
 
@@ -472,8 +472,8 @@ struct ComparisonResultTests {
             #expect(apple.compare.isEqual(to: "apple") == true)
         }
 
-        @Test("Double has .compare property")
-        func doubleCompare() {
+        @Test
+        func `Double has .compare property`() {
             var a = 1.5
             let b = 2.5
 
@@ -483,8 +483,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isEqual(to: 1.5) == true)
         }
 
-        @Test("Float has .compare property")
-        func floatCompare() {
+        @Test
+        func `Float has .compare property`() {
             var a: Float = 3.14
             let b: Float = 2.71
 
@@ -493,8 +493,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isLess(than: b) == false)
         }
 
-        @Test("Character has .compare property")
-        func characterCompare() {
+        @Test
+        func `Character has .compare property`() {
             var a: Character = "a"
             let z: Character = "z"
 
@@ -503,8 +503,8 @@ struct ComparisonResultTests {
             #expect(a.compare.isGreaterOrEqual(to: "a") == true)
         }
 
-        @Test("Int uses Comparison.Protocol path (both paths work)")
-        func intCompare() {
+        @Test
+        func `Int uses Comparison.Protocol path (both paths work)`() {
             // Int conforms to both Comparison.Protocol and Swift.Comparable
             // Either path should work
             var a = 5
@@ -515,16 +515,16 @@ struct ComparisonResultTests {
             #expect(a.compare.isLessOrEqual(to: 5) == true)
         }
 
-        @Test("String has .clamp property")
-        func stringClamp() {
+        @Test
+        func `String has .clamp property`() {
             var name = "bob"
             #expect(name.clamp.between("alice", and: "charlie") == "bob")
             #expect(name.clamp.above("charlie") == "charlie")
             #expect(name.clamp.below("alice") == "alice")
         }
 
-        @Test("Double has .clamp property")
-        func doubleClamp() {
+        @Test
+        func `Double has .clamp property`() {
             var temp = 105.0
             #expect(temp.clamp.between(0.0, and: 100.0) == 100.0)
             #expect(temp.clamp.above(110.0) == 110.0)
@@ -548,8 +548,8 @@ struct ComparisonResultTests {
                 .then(Comparison(comparing: lhs.id, to: rhs.id))
         }
 
-        @Test("Multi-field comparison")
-        func multiFieldComparison() {
+        @Test
+        func `Multi-field comparison`() {
             let alice1 = Person(name: "Alice", age: 30, id: 1)
             let alice2 = Person(name: "Alice", age: 30, id: 2)
             let alice3 = Person(name: "Alice", age: 25, id: 1)
