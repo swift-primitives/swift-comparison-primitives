@@ -1,7 +1,7 @@
 // Comparison.Protocol+Identity.Tagged.swift
 // Comparison.Protocol conformance for Tagged types.
 
-public import Identity_Primitives
+public import Tagged_Primitives
 
 extension Tagged: Comparison.`Protocol` where Tag: ~Copyable, RawValue: ~Copyable & Comparison.`Protocol` {
     /// Returns whether the left-hand side tagged value is less than the right-hand side.
