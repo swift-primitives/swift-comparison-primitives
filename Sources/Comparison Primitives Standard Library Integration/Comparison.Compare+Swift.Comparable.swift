@@ -29,37 +29,37 @@ extension Property.View where Base: Swift.Comparable & ~Copyable, Tag == Compari
     @_disfavoredOverload
     @inlinable
     public func to(_ other: borrowing Base) -> Comparison {
-        Comparison(comparing: unsafe base.pointee, to: other)
+        Comparison(comparing: unsafe base.value, to: other)
     }
 
     @_disfavoredOverload
     @inlinable
     public func isLess(than other: borrowing Base) -> Bool {
-        unsafe base.pointee < other
+        unsafe base.value < other
     }
 
     @_disfavoredOverload
     @inlinable
     public func isGreater(than other: borrowing Base) -> Bool {
-        unsafe base.pointee > other
+        unsafe base.value > other
     }
 
     @_disfavoredOverload
     @inlinable
     public func isEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee == other
+        unsafe base.value == other
     }
 
     @_disfavoredOverload
     @inlinable
     public func isLessOrEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee <= other
+        unsafe base.value <= other
     }
 
     @_disfavoredOverload
     @inlinable
     public func isGreaterOrEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee >= other
+        unsafe base.value >= other
     }
 }
 #else
@@ -81,7 +81,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func to(_ other: Base) -> Comparison {
-        Comparison(comparing: unsafe base.pointee, to: other)
+        Comparison(comparing: unsafe base.value, to: other)
     }
 
     /// Checks if this value is less than another: `.compare.isLess(than: other)`
@@ -91,7 +91,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func isLess(than other: Base) -> Bool {
-        unsafe base.pointee < other
+        unsafe base.value < other
     }
 
     /// Checks if this value is greater than another: `.compare.isGreater(than: other)`
@@ -101,7 +101,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func isGreater(than other: Base) -> Bool {
-        unsafe base.pointee > other
+        unsafe base.value > other
     }
 
     /// Checks if this value equals another: `.compare.isEqual(to: other)`
@@ -111,7 +111,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func isEqual(to other: Base) -> Bool {
-        unsafe base.pointee == other
+        unsafe base.value == other
     }
 
     /// Checks if this value is less than or equal to another: `.compare.isLessOrEqual(to: other)`
@@ -121,7 +121,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func isLessOrEqual(to other: Base) -> Bool {
-        unsafe base.pointee <= other
+        unsafe base.value <= other
     }
 
     /// Checks if this value is greater than or equal to another: `.compare.isGreaterOrEqual(to: other)`
@@ -131,7 +131,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Compare 
     @_disfavoredOverload
     @inlinable
     public func isGreaterOrEqual(to other: Base) -> Bool {
-        unsafe base.pointee >= other
+        unsafe base.value >= other
     }
 }
 #endif

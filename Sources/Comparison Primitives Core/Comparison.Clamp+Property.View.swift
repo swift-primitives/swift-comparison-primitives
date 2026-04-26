@@ -37,7 +37,7 @@ where Base: Comparison.`Protocol` & Copyable, Tag == Comparison.Clamp {
     /// - Returns: The clamped value.
     @inlinable
     public func between(_ lower: Base, and upper: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         if value < lower {
             return lower
         } else if value > upper {
@@ -64,7 +64,7 @@ where Base: Comparison.`Protocol` & Copyable, Tag == Comparison.Clamp {
     /// - Returns: The clamped value.
     @inlinable
     public func above(_ minimum: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         return value < minimum ? minimum : value
     }
 
@@ -85,7 +85,7 @@ where Base: Comparison.`Protocol` & Copyable, Tag == Comparison.Clamp {
     /// - Returns: The clamped value.
     @inlinable
     public func below(_ maximum: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         return value > maximum ? maximum : value
     }
 }

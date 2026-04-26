@@ -30,9 +30,9 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `.less`, `.equal`, or `.greater`.
     @inlinable
     public func to(_ other: borrowing Base) -> Comparison {
-        if unsafe base.pointee < other {
+        if unsafe base.value < other {
             return .less
-        } else if unsafe base.pointee == other {
+        } else if unsafe base.value == other {
             return .equal
         } else {
             return .greater
@@ -45,7 +45,7 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `true` if `self < other`.
     @inlinable
     public func isLess(than other: borrowing Base) -> Bool {
-        unsafe base.pointee < other
+        unsafe base.value < other
     }
 
     /// Checks if this value is greater than another: `.compare.isGreater(than: other)`
@@ -54,7 +54,7 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `true` if `self > other`.
     @inlinable
     public func isGreater(than other: borrowing Base) -> Bool {
-        unsafe base.pointee > other
+        unsafe base.value > other
     }
 
     /// Checks if this value equals another: `.compare.isEqual(to: other)`
@@ -63,7 +63,7 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `true` if `self == other`.
     @inlinable
     public func isEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee == other
+        unsafe base.value == other
     }
 
     /// Checks if this value is less than or equal to another: `.compare.isLessOrEqual(to: other)`
@@ -72,7 +72,7 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `true` if `self <= other`.
     @inlinable
     public func isLessOrEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee <= other
+        unsafe base.value <= other
     }
 
     /// Checks if this value is greater than or equal to another: `.compare.isGreaterOrEqual(to: other)`
@@ -81,6 +81,6 @@ where Base: Comparison.`Protocol` & ~Copyable, Tag == Comparison.Compare {
     /// - Returns: `true` if `self >= other`.
     @inlinable
     public func isGreaterOrEqual(to other: borrowing Base) -> Bool {
-        unsafe base.pointee >= other
+        unsafe base.value >= other
     }
 }

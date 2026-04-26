@@ -35,7 +35,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Clamp {
     @_disfavoredOverload
     @inlinable
     public func between(_ lower: Base, and upper: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         if value < lower {
             return lower
         } else if value > upper {
@@ -57,7 +57,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Clamp {
     @_disfavoredOverload
     @inlinable
     public func above(_ minimum: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         return value < minimum ? minimum : value
     }
 
@@ -73,7 +73,7 @@ extension Property.View where Base: Swift.Comparable, Tag == Comparison.Clamp {
     @_disfavoredOverload
     @inlinable
     public func below(_ maximum: Base) -> Base {
-        let value = unsafe base.pointee
+        let value = unsafe base.value
         return value > maximum ? maximum : value
     }
 }
