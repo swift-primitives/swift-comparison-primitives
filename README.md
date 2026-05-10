@@ -152,6 +152,12 @@ Pre-1.0. The 0.1.0 surface — `Comparison` enum, `Comparison.Protocol`, `Compar
 
 ---
 
+## Community
+
+<!-- BEGIN: discussion -->
+Discuss this package: [swift-institute/discussions/18](https://github.com/orgs/swift-institute/discussions/18)
+<!-- END: discussion -->
+
 ## License
 
 Apache 2.0. See [LICENSE.md](LICENSE.md).
