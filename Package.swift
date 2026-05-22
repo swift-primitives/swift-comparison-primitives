@@ -27,11 +27,9 @@ let package = Package(
             name: "Comparison Tagged Primitives",
             targets: ["Comparison Tagged Primitives"]
         ),
-
-        // MARK: - Core
         .library(
-            name: "Comparison Primitives Core",
-            targets: ["Comparison Primitives Core"]
+            name: "Comparison Property Primitives",
+            targets: ["Comparison Property Primitives"]
         ),
 
         // MARK: - StdLib Integration
@@ -79,16 +77,11 @@ let package = Package(
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
-
-        // MARK: - Core
         .target(
-            name: "Comparison Primitives Core",
+            name: "Comparison Property Primitives",
             dependencies: [
-                "Comparison Namespace",
                 "Comparison Protocol Primitives",
-                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
 
@@ -96,7 +89,8 @@ let package = Package(
         .target(
             name: "Comparison Primitives Standard Library Integration",
             dependencies: [
-                "Comparison Primitives Core"
+                "Comparison Protocol Primitives",
+                "Comparison Property Primitives",
             ]
         ),
 
@@ -107,8 +101,8 @@ let package = Package(
                 "Comparison Namespace",
                 "Comparison Protocol Primitives",
                 "Comparison Tagged Primitives",
-                "Comparison Primitives Core",
-                "Comparison Primitives Standard Library Integration"
+                "Comparison Property Primitives",
+                "Comparison Primitives Standard Library Integration",
             ]
         ),
 
