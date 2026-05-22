@@ -12,18 +12,31 @@ let package = Package(
         .visionOS(.v26),
     ],
     products: [
+        // MARK: - Namespace
         .library(
-            name: "Comparison Primitives",
-            targets: ["Comparison Primitives"]
+            name: "Comparison Namespace",
+            targets: ["Comparison Namespace"]
         ),
+
+        // MARK: - Core
         .library(
             name: "Comparison Primitives Core",
             targets: ["Comparison Primitives Core"]
         ),
+
+        // MARK: - StdLib Integration
         .library(
             name: "Comparison Primitives Standard Library Integration",
             targets: ["Comparison Primitives Standard Library Integration"]
         ),
+
+        // MARK: - Umbrella
+        .library(
+            name: "Comparison Primitives",
+            targets: ["Comparison Primitives"]
+        ),
+
+        // MARK: - Test Support
         .library(
             name: "Comparison Primitives Test Support",
             targets: ["Comparison Primitives Test Support"]
@@ -35,27 +48,42 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
     ],
     targets: [
+        // MARK: - Namespace
         .target(
-            name: "Comparison Primitives",
-            dependencies: [
-                "Comparison Primitives Core",
-                "Comparison Primitives Standard Library Integration"
-            ]
+            name: "Comparison Namespace",
+            dependencies: []
         ),
+
+        // MARK: - Core
         .target(
             name: "Comparison Primitives Core",
             dependencies: [
+                "Comparison Namespace",
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
+
+        // MARK: - StdLib Integration
         .target(
             name: "Comparison Primitives Standard Library Integration",
             dependencies: [
                 "Comparison Primitives Core"
             ]
         ),
+
+        // MARK: - Umbrella
+        .target(
+            name: "Comparison Primitives",
+            dependencies: [
+                "Comparison Namespace",
+                "Comparison Primitives Core",
+                "Comparison Primitives Standard Library Integration"
+            ]
+        ),
+
+        // MARK: - Test Support
         .target(
             name: "Comparison Primitives Test Support",
             dependencies: [
