@@ -14,8 +14,8 @@ let package = Package(
     products: [
         // MARK: - Namespace
         .library(
-            name: "Comparison Namespace",
-            targets: ["Comparison Namespace"]
+            name: "Comparison Primitive",
+            targets: ["Comparison Primitive"]
         ),
 
         // MARK: - Sub-namespace targets
@@ -58,7 +58,7 @@ let package = Package(
     targets: [
         // MARK: - Namespace
         .target(
-            name: "Comparison Namespace",
+            name: "Comparison Primitive",
             dependencies: []
         ),
 
@@ -66,7 +66,7 @@ let package = Package(
         .target(
             name: "Comparison Protocol Primitives",
             dependencies: [
-                "Comparison Namespace",
+                "Comparison Primitive",
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
             ]
         ),
@@ -98,7 +98,7 @@ let package = Package(
         .target(
             name: "Comparison Primitives",
             dependencies: [
-                "Comparison Namespace",
+                "Comparison Primitive",
                 "Comparison Protocol Primitives",
                 "Comparison Tagged Primitives",
                 "Comparison Property Primitives",

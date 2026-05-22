@@ -1,6 +1,6 @@
 // exports.swift
 // Re-export Comparison Protocol Primitives (transitively re-exports
-// Comparison_Namespace) + Tagged so consumers importing
+// Comparison_Primitive) + Tagged so consumers importing
 // Comparison_Tagged_Primitives see Comparison + Comparison.Protocol + Tagged
 // in scope via a single import.
 

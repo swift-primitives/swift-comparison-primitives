@@ -3,5 +3,5 @@
 // Comparison_Protocol_Primitives see Comparison + Comparison.Protocol +
 // Equation.Protocol in scope via a single import.
 
-@_exported public import Comparison_Namespace
+@_exported public import Comparison_Primitive
 @_exported public import Equation_Primitives

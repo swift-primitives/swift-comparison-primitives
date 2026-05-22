@@ -6,7 +6,7 @@
 // Equation_Primitives (preserved as a convenience re-export from the
 // pre-migration shape).
 
-@_exported public import Comparison_Namespace
+@_exported public import Comparison_Primitive
 @_exported public import Comparison_Protocol_Primitives
 @_exported public import Comparison_Tagged_Primitives
 @_exported public import Comparison_Property_Primitives
