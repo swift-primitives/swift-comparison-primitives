@@ -23,6 +23,10 @@ let package = Package(
             name: "Comparison Protocol Primitives",
             targets: ["Comparison Protocol Primitives"]
         ),
+        .library(
+            name: "Comparison Tagged Primitives",
+            targets: ["Comparison Tagged Primitives"]
+        ),
 
         // MARK: - Core
         .library(
@@ -68,6 +72,13 @@ let package = Package(
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
             ]
         ),
+        .target(
+            name: "Comparison Tagged Primitives",
+            dependencies: [
+                "Comparison Protocol Primitives",
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
+            ]
+        ),
 
         // MARK: - Core
         .target(
@@ -95,6 +106,7 @@ let package = Package(
             dependencies: [
                 "Comparison Namespace",
                 "Comparison Protocol Primitives",
+                "Comparison Tagged Primitives",
                 "Comparison Primitives Core",
                 "Comparison Primitives Standard Library Integration"
             ]
