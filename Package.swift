@@ -18,6 +18,12 @@ let package = Package(
             targets: ["Comparison Namespace"]
         ),
 
+        // MARK: - Sub-namespace targets
+        .library(
+            name: "Comparison Protocol Primitives",
+            targets: ["Comparison Protocol Primitives"]
+        ),
+
         // MARK: - Core
         .library(
             name: "Comparison Primitives Core",
@@ -54,11 +60,21 @@ let package = Package(
             dependencies: []
         ),
 
+        // MARK: - Sub-namespace targets (per [MOD-031])
+        .target(
+            name: "Comparison Protocol Primitives",
+            dependencies: [
+                "Comparison Namespace",
+                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
+            ]
+        ),
+
         // MARK: - Core
         .target(
             name: "Comparison Primitives Core",
             dependencies: [
                 "Comparison Namespace",
+                "Comparison Protocol Primitives",
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
@@ -78,6 +94,7 @@ let package = Package(
             name: "Comparison Primitives",
             dependencies: [
                 "Comparison Namespace",
+                "Comparison Protocol Primitives",
                 "Comparison Primitives Core",
                 "Comparison Primitives Standard Library Integration"
             ]

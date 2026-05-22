@@ -2,6 +2,7 @@
 // Re-exports dependencies for convenient single-import usage.
 
 @_exported public import Comparison_Namespace
+@_exported public import Comparison_Protocol_Primitives
 @_exported public import Comparison_Primitives_Core
 @_exported public import Comparison_Primitives_Standard_Library_Integration
 @_exported public import Equation_Primitives
