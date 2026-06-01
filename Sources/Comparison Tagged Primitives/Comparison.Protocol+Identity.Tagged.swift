@@ -4,7 +4,7 @@
 
     public import Tagged_Primitives
 
-    extension Tagged: Comparison.`Protocol` where Tag: ~Copyable, Underlying: ~Copyable & Comparison.`Protocol` {
+    extension Tagged: Comparison.`Protocol` where Tag: ~Copyable & ~Escapable, Underlying: ~Copyable & Comparison.`Protocol` {
         /// Returns whether the left-hand side tagged value is less than the right-hand side.
         ///
         /// Compares the underlying values using `Comparison.Protocol` semantics,
