@@ -37,6 +37,9 @@ extension Comparison {
     /// let result = Comparison(token1, token2)
     /// ```
     @inlinable
+    // Generic constraint conformance (T: Comparison.Protocol), not identity — Self
+    // would wrongly force T == Self (cf. svg 60e00fd precedent).
+    // swiftlint:disable:next prefer_self_in_static_references
     public init<T: Comparison.`Protocol` & ~Copyable>(_ lhs: borrowing T, _ rhs: borrowing T) {
         if lhs < rhs {
             self = .less
