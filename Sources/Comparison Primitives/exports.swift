@@ -7,9 +7,9 @@
 // pre-migration shape).
 
 @_exported public import Comparison_Primitive
+@_exported public import Comparison_Primitives_Standard_Library_Integration
+@_exported public import Comparison_Property_Primitives
 @_exported public import Comparison_Protocol_Primitives
 @_exported public import Comparison_Tagged_Primitives
-@_exported public import Comparison_Property_Primitives
-@_exported public import Comparison_Primitives_Standard_Library_Integration
 @_exported public import Equation_Primitives
 @_exported public import Property_Primitives
