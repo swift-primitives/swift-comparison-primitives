@@ -103,6 +103,7 @@ let package = Package(
                 "Comparison Tagged Primitives",
                 "Comparison Property Primitives",
                 "Comparison Primitives Standard Library Integration",
+                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
             ]
         ),
 
