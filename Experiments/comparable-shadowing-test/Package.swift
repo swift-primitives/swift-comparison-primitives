@@ -21,7 +21,7 @@ let package = Package(
             name: "Consumer",
             dependencies: ["ComparableShadow"],
             path: "Sources/Consumer"
-        )
+        ),
     ],
     swiftLanguageModes: [.v6]
 )

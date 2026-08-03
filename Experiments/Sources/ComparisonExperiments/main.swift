@@ -545,28 +545,32 @@ struct ComparisonExperiments {
 
         print("\n CLAIMS VERIFICATION SUMMARY")
         print(String(repeating: "-", count: 70))
-        print("""
-        | ID        | Claim                                          | Result   |
-        |-----------|------------------------------------------------|----------|
-        | CLAIM-001 | Reversal is an involution                      | VERIFIED |
-        | CLAIM-002 | Chaining forms a monoid with equal as identity | VERIFIED |
-        | CLAIM-003 | @inlinable provides performance benefits       | VERIFIED |
-        | CLAIM-004 | Compiles with Swift 6 strict concurrency       | VERIFIED |
-        | CLAIM-005 | No Foundation dependency needed                | VERIFIED |
-        | CLAIM-006 | then(_:) implements lexicographic chaining     | VERIFIED |
-        | CLAIM-007 | Boolean properties correctly identify cases    | VERIFIED |
-        """)
+        print(
+            """
+            | ID        | Claim                                          | Result   |
+            |-----------|------------------------------------------------|----------|
+            | CLAIM-001 | Reversal is an involution                      | VERIFIED |
+            | CLAIM-002 | Chaining forms a monoid with equal as identity | VERIFIED |
+            | CLAIM-003 | @inlinable provides performance benefits       | VERIFIED |
+            | CLAIM-004 | Compiles with Swift 6 strict concurrency       | VERIFIED |
+            | CLAIM-005 | No Foundation dependency needed                | VERIFIED |
+            | CLAIM-006 | then(_:) implements lexicographic chaining     | VERIFIED |
+            | CLAIM-007 | Boolean properties correctly identify cases    | VERIFIED |
+            """
+        )
 
         print("\n ASSUMPTIONS VERIFICATION SUMMARY")
         print(String(repeating: "-", count: 70))
-        print("""
-        | ID         | Assumption                                     | Result   |
-        |------------|------------------------------------------------|----------|
-        | ASSUMP-001 | Swift enums with three cases work as expected  | VERIFIED |
-        | ASSUMP-002 | Protocols available without Foundation         | VERIFIED |
-        | ASSUMP-003 | Generic initializer from Comparable works      | VERIFIED |
-        | ASSUMP-004 | prefix func ! operator can be defined          | VERIFIED |
-        """)
+        print(
+            """
+            | ID         | Assumption                                     | Result   |
+            |------------|------------------------------------------------|----------|
+            | ASSUMP-001 | Swift enums with three cases work as expected  | VERIFIED |
+            | ASSUMP-002 | Protocols available without Foundation         | VERIFIED |
+            | ASSUMP-003 | Generic initializer from Comparable works      | VERIFIED |
+            | ASSUMP-004 | prefix func ! operator can be defined          | VERIFIED |
+            """
+        )
 
         print("\n OVERALL RESULTS")
         print(String(repeating: "-", count: 70))

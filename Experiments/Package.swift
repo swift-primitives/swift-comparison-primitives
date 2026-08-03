@@ -5,13 +5,13 @@ import PackageDescription
 let package = Package(
     name: "ComparisonExperiments",
     platforms: [
-        .macOS(.v14),
+        .macOS(.v14)
     ],
     targets: [
         .executableTarget(
             name: "ComparisonExperiments",
             path: "Sources/ComparisonExperiments"
-        ),
+        )
     ],
     swiftLanguageModes: [.v6]
 )
