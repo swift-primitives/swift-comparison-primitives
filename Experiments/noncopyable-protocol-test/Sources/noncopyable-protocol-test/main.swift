@@ -80,7 +80,7 @@ struct ComparableNonCopyable: ~Copyable, ComparableProtocol {
 let e = ComparableNonCopyable(value: 1)
 let f = ComparableNonCopyable(value: 1)
 let g = ComparableNonCopyable(value: 2)
-print("V3 - Comparable protocol <: \(e < g)")   // true
+print("V3 - Comparable protocol <: \(e < g)")  // true
 print("V3 - Comparable protocol ==: \(e == f)")  // true
 
 // =============================================================================
@@ -125,11 +125,11 @@ struct FullComparableNonCopyable: ~Copyable, FullComparableProtocol {
 let h = FullComparableNonCopyable(value: 5)
 let i = FullComparableNonCopyable(value: 5)
 let j = FullComparableNonCopyable(value: 10)
-print("V4 - Full protocol <: \(h < j)")   // true
-print("V4 - Full protocol ==: \(h == i)") // true
-print("V4 - Full protocol <=: \(h <= i)") // true
-print("V4 - Full protocol >: \(j > h)")   // true
-print("V4 - Full protocol >=: \(h >= i)") // true
+print("V4 - Full protocol <: \(h < j)")  // true
+print("V4 - Full protocol ==: \(h == i)")  // true
+print("V4 - Full protocol <=: \(h <= i)")  // true
+print("V4 - Full protocol >: \(j > h)")  // true
+print("V4 - Full protocol >=: \(h >= i)")  // true
 
 // =============================================================================
 // VARIANT 5: Result enum for three-way comparison
